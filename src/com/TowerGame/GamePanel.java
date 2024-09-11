@@ -5,27 +5,69 @@ import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable {
     Dimension panelDimension;
-    public GamePanel(final Dimension panelDimension) {
-        this.panelDimension = panelDimension;
-        setPreferredSize(panelDimension);
+    Thread gameThread;
 
+    private int FPS = 60;
+
+    private int rectangleX = 100;
+    private int rectangleY = 100;
+
+    public GamePanel() {
+        Dimension screenDimension = Toolkit.getDefaultToolkit().getScreenSize();
+
+        this.panelDimension = screenDimension;
+        setPreferredSize(panelDimension);
+        setBackground(Color.BLACK);
+        setDoubleBuffered(true);
+    }
+
+    public void startGameThread() {
+        gameThread = new Thread(this);
+        gameThread.start();
     }
 
     @Override
     public void run() {
-        System.out.println("test");
-        Graphics g = this.getGraphics();
-        g.setColor(Color.RED);
-        g.drawRect(600, 200, 100, 50);
-        g.dispose();
+        while (gameThread != null) {
+            double drawInterval = 1000000000 / FPS;
+            double nextDrawTime = System.nanoTime() + drawInterval;
+
+            update();
+
+            repaint();
+
+            try {
+                double remainingTime = nextDrawTime - System.nanoTime();
+                remainingTime = remainingTime/1000000;
+
+                if (remainingTime < 0) {
+                    remainingTime = 0;
+                }
+
+                Thread.sleep((long) remainingTime);
+
+                nextDrawTime += drawInterval;
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
-//    @Override
-//    protected void paintComponent(Graphics g) {
-//        super.paintComponent(g); // Always call super.paintComponent to ensure proper painting of the component's background
-//        g.setColor(Color.RED);
-//        g.fillRect(600, 200, 50, 100); // Draw the rectangle here
-//    }
+    public void update() {
+        rectangleX+=1;
+    }
+
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        Graphics2D graphics2D = (Graphics2D) g;
+
+        graphics2D.setColor(Color.RED);
+
+        graphics2D.fillRect(rectangleX, rectangleY, 50, 50); // Draw the rectangle here
+
+        graphics2D.dispose();
+    }
 }
 
 

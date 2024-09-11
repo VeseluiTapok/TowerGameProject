@@ -4,18 +4,21 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Window extends JFrame {
+    GamePanel panel;
+
     public Window() {
-
-        Dimension screenDimension = Toolkit.getDefaultToolkit().getScreenSize();
         setTitle("TowerGame");
+        setResizable(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        panel = new GamePanel();
+        setContentPane (new GamePanel());
 
-        setContentPane(new GamePanel(screenDimension));
         pack();
 
-
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
         setVisible(true);
 
+        panel.startGameThread();
     }
 }
