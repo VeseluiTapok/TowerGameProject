@@ -1,3 +1,5 @@
+package com.TowerGame.Entity;
+
 public class Tower {
     private int currentXP;
     private int maxXP;

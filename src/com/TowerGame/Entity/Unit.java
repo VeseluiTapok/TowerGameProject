@@ -1,3 +1,5 @@
+package com.TowerGame.Entity;
+
 public class Unit {
     private int currentXP;
     private int maxXp;
