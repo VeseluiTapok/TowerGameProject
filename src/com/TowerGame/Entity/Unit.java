@@ -1,8 +1,10 @@
 package com.TowerGame.Entity;
 
-public class Unit {
-    private int currentXP;
-    private int maxXp;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+
+public class Unit extends Entity{
+
     private int moveSpeed;
     private int damage;
     private int attackSpeed;
@@ -10,10 +12,10 @@ public class Unit {
     private int rechargePrice;
     private int attackRange;
 
-    public Unit (int currentXP, int maxXp, int moveSpeed, int damage,
-                 int attackSpeed, int price, int recharge, int attackRange) {
-        this.currentXP = currentXP;
-        this.maxXp = maxXp;
+    public Unit (int currentXP, int maxXp, BufferedImage texture, Rectangle hitBox, int moveSpeed,
+                 int damage, int attackSpeed, int price, int recharge, int attackRange) {
+
+        super(currentXP, maxXp, texture, hitBox);
         this.moveSpeed = moveSpeed;
         this.damage = damage;
         this.attackSpeed = attackSpeed;
@@ -23,6 +25,6 @@ public class Unit {
     }
 
     public void attack(Unit unit) {
-        unit.currentXP -= damage;
+        super.setCurrentXP(super.getCurrentXP() - damage);
     }
 }

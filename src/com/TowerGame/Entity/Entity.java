@@ -10,6 +10,13 @@ public abstract class Entity {
     private BufferedImage texture;
     private Rectangle hitBox;
 
+    public Entity(int currentXP, int maxXP, BufferedImage texture, Rectangle hitBox) {
+        this.currentXP = currentXP;
+        this.maxXP = maxXP;
+        this.texture = texture;
+        this.hitBox = hitBox;
+    }
+
     public Rectangle getHitbox() {
         return hitBox;
     }

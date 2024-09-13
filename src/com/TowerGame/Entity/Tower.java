@@ -1,18 +1,20 @@
 package com.TowerGame.Entity;
 
-public class Tower {
-    private int currentXP;
-    private int maxXP;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+
+public class Tower extends Entity{
     private int currentCoin;
     private int maxCoin;
     private int coinIncome;
-    void Tower(int currentXP, int maxXP, int currentCoin, int maxCoin, int coinIncome) {
-        this.currentXP = currentXP;
-        this.maxXP = maxXP;
+
+    public Tower(int currentXP, int maxXP, BufferedImage texture, Rectangle hitBox,
+                 int currentCoin, int maxCoin, int coinIncome) {
+        super(currentXP, maxXP, texture, hitBox);
+
         this.currentCoin = currentCoin;
         this.maxCoin = maxCoin;
         this.coinIncome = coinIncome;
     }
-
 }
 
